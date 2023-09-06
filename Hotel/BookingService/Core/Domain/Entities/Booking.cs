@@ -9,6 +9,8 @@ public class Booking
     public DateTime PlacedAt { get; set; }
     public DateTime Start { get; set; }
     public DateTime End { get; set; }
+    public Room Room { get; set; }
+    public Guest Guest { get; set; }
     public Status Status { get; set; } = Status.Created;
 
     public Status CurrentStatus => this.Status;
