@@ -1,30 +1,29 @@
-using Data;
-using Microsoft.EntityFrameworkCore;
+using IoC.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-
-# region DB wiring up
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<HotelDbContext>(
-    options => options.UseSqlServer(connectionString));
+# region IoC
+builder.Services.AddInfrastructure(builder.Configuration);
 # endregion
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthorization();
+
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+#region Middleware
+app.UseMiddleware<HttpStatusCodeMiddleware>();
+#endregion
 
 app.UseHttpsRedirection();
 

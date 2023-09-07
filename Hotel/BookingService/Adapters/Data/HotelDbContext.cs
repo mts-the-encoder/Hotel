@@ -11,6 +11,7 @@ public class HotelDbContext : DbContext
     public virtual DbSet<Booking> Bookings { get; set; }
     public virtual DbSet<Room> Rooms { get; set; }
     public virtual DbSet<Guest> Guests { get; set; }
+    public virtual DbSet<ExceptionLog> ExceptionLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
