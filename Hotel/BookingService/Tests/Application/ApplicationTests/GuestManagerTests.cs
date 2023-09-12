@@ -1,8 +1,6 @@
-﻿using Application.Base;
-using Application.Guest.Requests;
+﻿using Application.Guest.Requests;
 using Application.UseCases.Guest;
 using ApplicationTests.Request;
-using Bogus;
 using FluentAssertions;
 using Tests.Mapper;
 using Tests.Repositories;

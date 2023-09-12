@@ -9,6 +9,6 @@ public class AutoMapperConfiguration : Profile
     {
         CreateMap<GuestDTO, Domain.Entities.Guest>()
             .ForPath(dest => dest.Document.DocumentType, opt => opt.MapFrom(src => src.IdTypeCode))
-            .ForPath(dest => dest.Document.IdNumber, opt => opt.MapFrom(src => src.IdNumber));
+            .ForPath(dest => dest.Document.IdNumber, opt => opt.MapFrom(src => src.IdNumber)).ReverseMap();
     }
 }

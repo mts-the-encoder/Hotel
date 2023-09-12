@@ -11,9 +11,9 @@ public class GuestRepository : IGuestRepository
         _dbContext = dbContext;
     }
 
-    public Task<Guest> GetByIdAsync(int id)
+    public async Task<Guest> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Guests.FindAsync(id);
     }
 
     public async Task<int> SaveAsync(Guest guest)

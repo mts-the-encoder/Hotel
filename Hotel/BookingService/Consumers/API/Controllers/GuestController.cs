@@ -22,4 +22,12 @@ public class GuestController : HotelBookingController
 
         return Created(string.Empty, guest.Data);
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<GuestDTO>> Get(int id)
+    {
+        var response = await _guestManager.GetById(id);
+
+        return Ok(response.Data);
+    }
 }

@@ -3,6 +3,7 @@ using Application.Guest.Ports;
 using Application.Guest.Requests;
 using Application.Guest.Responses;
 using AutoMapper;
+using Data.Exceptions;
 using Domain.Ports;
 
 namespace Application.UseCases.Guest;
@@ -30,6 +31,11 @@ public class GuestManager : IGuestManager
         return new GuestResponse(data: request.Data, success: true);
     }
 
+    public async Task<GuestResponse> GetById(int id)
+    {
+        return await ExistsGuest(id);
+    }
+
     private static void Validate(GuestDTO guest)
     {
         var validator = new GuestValidator();
@@ -40,5 +46,16 @@ public class GuestManager : IGuestManager
             var error = response.Errors.Select(x => x.ErrorMessage).FirstOrDefault();
             throw new FluentValidation.ValidationException(error);
         }
+    }
+
+    private async Task<GuestResponse> ExistsGuest(int id)
+    {
+        var guest = await _repository.GetByIdAsync(id);
+
+        if (guest is null) throw new KeyNotFoundException($"Guest with id: {id} not found");
+
+        var guestDto = _mapper.Map<GuestDTO>(guest);
+
+        return new GuestResponse(data: guestDto,success: true);
     }
 }
