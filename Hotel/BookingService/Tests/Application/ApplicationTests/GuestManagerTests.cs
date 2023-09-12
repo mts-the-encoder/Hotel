@@ -77,7 +77,6 @@ public class GuestManagerTests
 
     [Theory]
     [InlineData("nm", "sm")]
-    [InlineData("nm", "sm")]
     public async Task Should_Return_Invalid_Person_Name_And_Surname(string name, string surname)
     {
         var guestDto = GuestRequestBuilder.Build();
@@ -98,6 +97,26 @@ public class GuestManagerTests
 
         await action.Should().ThrowAsync<FluentValidation.ValidationException>()
             .Where(ex => ex.Message.Equals("Name must be at least 3 characters"));
+    }
+
+    [Fact]
+    public async Task Should_Throw_Not_Found()
+    {
+        var guestDto = GuestRequestBuilder.Build();
+
+        var request = new GuestRequest()
+        {
+            Data = guestDto
+        };
+
+        var useCase = CreateUseCase(request);
+
+        var action = async () =>
+        {
+            await useCase.GetById(guestDto.Id);
+        };
+
+        await action.Should().ThrowAsync<KeyNotFoundException>();
     }
 
     private static GuestManager CreateUseCase(GuestRequest guest)
