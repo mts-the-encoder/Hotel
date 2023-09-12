@@ -10,6 +10,7 @@ namespace Application.UseCases.Guest;
 public class GuestManager : IGuestManager
 {
     private readonly IGuestRepository _repository;
+
     private readonly IMapper _mapper;
 
     public GuestManager(IGuestRepository repository, IMapper mapper)

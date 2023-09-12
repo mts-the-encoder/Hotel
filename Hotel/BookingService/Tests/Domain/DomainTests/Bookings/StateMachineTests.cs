@@ -12,7 +12,7 @@ public class StateMachineTests
     [Fact]
     public void ShouldInitializeWithStatusCreated()
     {
-        var booking = BookingBuilder.Buid();
+        var booking = BookingBuilder.Build();
 
         booking.CurrentStatus.Should().Be(Status.Created);
         booking.CurrentStatus.Should().HaveSameValueAs(Status.Created);
@@ -26,7 +26,7 @@ public class StateMachineTests
     public void ShouldSetStatusToPaidWhenPayingForABooking()
     {
         #region Arrange
-        var booking = BookingBuilder.Buid();
+        var booking = BookingBuilder.Build();
         #endregion
 
         #region Act
@@ -46,7 +46,7 @@ public class StateMachineTests
     [Fact]
     public void ShouldSetStatusToCancelledWhenCancelABooking()
     {
-        var booking = BookingBuilder.Buid();
+        var booking = BookingBuilder.Build();
 
         booking.ChangeState(Action.Cancel);
 
@@ -61,7 +61,7 @@ public class StateMachineTests
     [Fact]
     public void ShouldSetStatusToFinishedWhenFinishingAPaidBooking()
     {
-        var booking = BookingBuilder.Buid();
+        var booking = BookingBuilder.Build();
 
         booking.ChangeState(Action.Pay);
         booking.ChangeState(Action.Finish);
@@ -77,7 +77,7 @@ public class StateMachineTests
     [Fact]
     public void ShouldSetStatusToRefundedWhenRefundingAPaidBooking()
     {
-        var booking = BookingBuilder.Buid();
+        var booking = BookingBuilder.Build();
 
         booking.ChangeState(Action.Pay);
         booking.ChangeState(Action.Refund);
@@ -93,7 +93,7 @@ public class StateMachineTests
     [Fact]
     public void ShouldSetStatusToCreatedWhenReopenCancelledBooking()
     {
-        var booking = BookingBuilder.Buid();
+        var booking = BookingBuilder.Build();
 
         booking.ChangeState(Action.Cancel);
         booking.ChangeState(Action.Reopen);
@@ -109,7 +109,7 @@ public class StateMachineTests
     [Fact]
     public void ShouldNotChangeStatusWhenRefundingABookingWithCreatedStatus()
     {
-        var booking = BookingBuilder.Buid();
+        var booking = BookingBuilder.Build();
 
         booking.ChangeState(Action.Refund);
 
@@ -124,7 +124,7 @@ public class StateMachineTests
     [Fact]
     public void ShouldNotChangeStatusWhenRefundingAFinishedBooking()
     {
-        var booking = BookingBuilder.Buid();
+        var booking = BookingBuilder.Build();
 
         booking.ChangeState(Action.Pay);
         booking.ChangeState(Action.Finish);

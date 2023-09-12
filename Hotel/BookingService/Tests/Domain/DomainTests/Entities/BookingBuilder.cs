@@ -5,7 +5,7 @@ namespace Tests.Entities;
 
 public class BookingBuilder
 {
-    public static Booking Buid()
+    public static Booking Build()
     {
         return new Faker<Booking>()
             .RuleFor(x => x.Id, f => f.Random.Int())
