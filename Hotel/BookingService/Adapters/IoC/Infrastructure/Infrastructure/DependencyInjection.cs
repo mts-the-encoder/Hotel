@@ -1,8 +1,10 @@
 ﻿using Application.Guest.Ports;
+using Application.Room.Ports;
 using Application.Services;
 using Application.Services.Abstractions;
 using Application.Services.Mapper;
 using Application.UseCases.Guest;
+using Application.UseCases.Room;
 using Data;
 using Data.Repositories;
 using Domain.Ports;
@@ -22,6 +24,8 @@ public static class DependencyInjection
 
         services.AddSingleton<IExceptionLoggerService, ExceptionLoggerService>();
         services.AddScoped<IGuestRepository, GuestRepository>();
+        services.AddScoped<IRoomRepository, RoomRepository>();
+        services.AddScoped<IRoomManager, RoomManager>();
         services.AddScoped<IGuestManager, GuestManager>();
         services.AddAutoMapper(typeof(AutoMapperConfiguration));
 

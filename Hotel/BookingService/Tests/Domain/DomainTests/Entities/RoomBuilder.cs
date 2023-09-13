@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Domain.Entities;
 
-namespace Tests.Entities;
+namespace DomainTests.Entities;
 
 public class RoomBuilder
 {

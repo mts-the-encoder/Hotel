@@ -1,7 +1,7 @@
 ﻿using Application.Services.Mapper;
 using AutoMapper;
 
-namespace Tests.Mapper;
+namespace ApplicationTests.Mapper;
 
 public class MapperBuilder
 {

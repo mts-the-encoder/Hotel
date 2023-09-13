@@ -1,5 +1,4 @@
 ﻿using Application.Guest.DTO;
-using Application.Guest.Requests;
 using Bogus;
 
 namespace ApplicationTests.Request;

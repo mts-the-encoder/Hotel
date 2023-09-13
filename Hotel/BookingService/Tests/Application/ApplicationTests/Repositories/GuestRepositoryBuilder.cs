@@ -1,7 +1,7 @@
 ﻿using Domain.Ports;
 using Moq;
 
-namespace Tests.Repositories;
+namespace ApplicationTests.Repositories;
 
 public class GuestRepositoryBuilder
 {

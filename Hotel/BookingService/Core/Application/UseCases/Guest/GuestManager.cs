@@ -3,7 +3,6 @@ using Application.Guest.Ports;
 using Application.Guest.Requests;
 using Application.Guest.Responses;
 using AutoMapper;
-using Data.Exceptions;
 using Domain.Ports;
 
 namespace Application.UseCases.Guest;
@@ -11,7 +10,6 @@ namespace Application.UseCases.Guest;
 public class GuestManager : IGuestManager
 {
     private readonly IGuestRepository _repository;
-
     private readonly IMapper _mapper;
 
     public GuestManager(IGuestRepository repository, IMapper mapper)

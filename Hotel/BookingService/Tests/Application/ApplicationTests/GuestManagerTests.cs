@@ -1,9 +1,9 @@
 ﻿using Application.Guest.Requests;
 using Application.UseCases.Guest;
+using ApplicationTests.Mapper;
+using ApplicationTests.Repositories;
 using ApplicationTests.Request;
 using FluentAssertions;
-using Tests.Mapper;
-using Tests.Repositories;
 
 namespace ApplicationTests;
 
@@ -18,6 +18,7 @@ public class GuestManagerTests
         {
             Data = guestDto
         };
+
 
         var useCase = CreateUseCase(request);
 

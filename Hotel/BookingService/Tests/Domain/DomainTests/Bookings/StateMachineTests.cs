@@ -1,10 +1,9 @@
-﻿using Domain.Entities;
-using Domain.Enums;
+﻿using Domain.Enums;
+using DomainTests.Entities;
 using FluentAssertions;
-using Tests.Entities;
 using Action = Domain.Enums.Action;
 
-namespace Tests.Bookings;
+namespace DomainTests.Bookings;
 
 public class StateMachineTests
 {

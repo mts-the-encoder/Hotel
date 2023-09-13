@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Net;
-using Data.Exceptions;
 
 public class HttpStatusCodeMiddleware
 {
