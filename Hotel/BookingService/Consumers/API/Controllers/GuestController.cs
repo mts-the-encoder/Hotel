@@ -1,4 +1,4 @@
-﻿using Application.Guest.DTO;
+﻿using Application.Guest.Dto;
 using Application.Guest.Ports;
 using Application.Guest.Requests;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +14,9 @@ public class GuestController : HotelBookingController
     }
 
     [HttpPost]
-    public async Task<ActionResult<GuestDTO>> Create(GuestDTO dto)
+    public async Task<ActionResult<GuestDto>> Create(GuestDto Dto)
     {
-        var guest = new GuestRequest(data: dto);
+        var guest = new GuestRequest(data: Dto);
 
         await _guestManager.Create(guest);
 
@@ -24,7 +24,7 @@ public class GuestController : HotelBookingController
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<GuestDTO>> Get(int id)
+    public async Task<ActionResult<GuestDto>> Get(int id)
     {
         var response = await _guestManager.GetById(id);
 

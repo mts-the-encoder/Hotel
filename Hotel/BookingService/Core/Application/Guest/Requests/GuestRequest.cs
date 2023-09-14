@@ -1,13 +1,13 @@
-﻿using Application.Guest.DTO;
+﻿using Application.Guest.Dto;
 
 namespace Application.Guest.Requests;
 
 public class GuestRequest
 {
-    public GuestDTO Data;
+    public GuestDto Data;
     public GuestRequest() { }
 
-    public GuestRequest(GuestDTO data)
+    public GuestRequest(GuestDto data)
     {
         Data = data;
     }

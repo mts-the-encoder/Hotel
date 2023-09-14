@@ -1,16 +1,16 @@
 ﻿using Application.Base;
-using Application.Room.DTO;
+using Application.Room.Dto;
 
 namespace Application.Room.Responses;
 
 public class RoomResponse : Response
 {
-    public RoomDTO Data;
+    public RoomDto Data;
     public RoomResponse()
     {
     }
 
-    public RoomResponse(RoomDTO data, bool success)
+    public RoomResponse(RoomDto data, bool success)
     {
         Data = data;
         Success = success;

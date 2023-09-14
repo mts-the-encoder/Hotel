@@ -1,9 +1,9 @@
-﻿using Application.Guest.DTO;
+﻿using Application.Guest.Dto;
 using FluentValidation;
 
 namespace Application.UseCases.Guest;
 
-public class GuestValidator : AbstractValidator<GuestDTO>
+public class GuestValidator : AbstractValidator<GuestDto>
 {
     public GuestValidator()
     {

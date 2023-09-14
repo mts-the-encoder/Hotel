@@ -1,8 +1,10 @@
-﻿using Application.Guest.Ports;
+﻿using Application.Booking.Ports;
+using Application.Guest.Ports;
 using Application.Room.Ports;
 using Application.Services;
 using Application.Services.Abstractions;
 using Application.Services.Mapper;
+using Application.UseCases.Booking;
 using Application.UseCases.Guest;
 using Application.UseCases.Room;
 using Data;
@@ -23,10 +25,12 @@ public static class DependencyInjection
                 b => b.MigrationsAssembly(typeof(HotelDbContext).Assembly.FullName)));
 
         services.AddSingleton<IExceptionLoggerService, ExceptionLoggerService>();
+        services.AddScoped<IBookingRepository, BookingRepository>();
         services.AddScoped<IGuestRepository, GuestRepository>();
         services.AddScoped<IRoomRepository, RoomRepository>();
-        services.AddScoped<IRoomManager, RoomManager>();
+        services.AddScoped<IBookingManager, BookingManager>();
         services.AddScoped<IGuestManager, GuestManager>();
+        services.AddScoped<IRoomManager, RoomManager>();
         services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
 

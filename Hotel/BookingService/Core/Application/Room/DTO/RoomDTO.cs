@@ -1,6 +1,6 @@
-﻿namespace Application.Room.DTO;
+﻿namespace Application.Room.Dto;
 
-public class RoomDTO
+public class RoomDto
 {
     public int Id { get; set; }
     public string Name { get; set; }

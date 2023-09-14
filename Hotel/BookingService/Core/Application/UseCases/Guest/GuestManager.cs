@@ -1,4 +1,4 @@
-﻿using Application.Guest.DTO;
+﻿using Application.Guest.Dto;
 using Application.Guest.Ports;
 using Application.Guest.Requests;
 using Application.Guest.Responses;
@@ -18,15 +18,15 @@ public class GuestManager : IGuestManager
         _mapper = mapper;
     }
 
-    public async Task<GuestResponse> Create(GuestRequest request)
+    public async Task<GuestResponse> Create(GuestRequest dto)
     {
-        Validate(request.Data);
+        Validate(dto.Data);
 
-        var guest = _mapper.Map<Domain.Entities.Guest>(request.Data);
+        var guest = _mapper.Map<Domain.Entities.Guest>(dto.Data);
 
         await _repository.SaveAsync(guest);
 
-        return new GuestResponse(data: request.Data, success: true);
+        return new GuestResponse(data: dto.Data, success: true);
     }
 
     public async Task<GuestResponse> GetById(int id)
@@ -34,7 +34,7 @@ public class GuestManager : IGuestManager
         return await ExistsGuest(id);
     }
 
-    private static void Validate(GuestDTO guest)
+    private static void Validate(GuestDto guest)
     {
         var validator = new GuestValidator();
         var response = validator.Validate(guest);
@@ -52,7 +52,7 @@ public class GuestManager : IGuestManager
 
         if (guest is null) throw new KeyNotFoundException($"Guest with id: {id} not found");
 
-        var guestDto = _mapper.Map<GuestDTO>(guest);
+        var guestDto = _mapper.Map<GuestDto>(guest);
 
         return new GuestResponse(data: guestDto,success: true);
     }

@@ -1,5 +1,5 @@
 ﻿
-using Application.Room.DTO;
+using Application.Room.Dto;
 using Application.Room.Requests;
 using Application.Room.Ports;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +15,9 @@ public class RoomController : HotelBookingController
     }
 
     [HttpPost]
-    public async Task<ActionResult<RoomDTO>> Create(RoomDTO dto)
+    public async Task<ActionResult<RoomDto>> Create(RoomDto Dto)
     {
-        var room = new RoomRequest(data: dto);
+        var room = new RoomRequest(data: Dto);
 
         await _roomManager.Create(room);
 
@@ -25,7 +25,7 @@ public class RoomController : HotelBookingController
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<RoomDTO>> Get(int id)
+    public async Task<ActionResult<RoomDto>> Get(int id)
     {
         var response = await _roomManager.GetById(id);
 

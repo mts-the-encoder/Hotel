@@ -1,4 +1,4 @@
-﻿using Application.Room.DTO;
+﻿using Application.Room.Dto;
 using Application.Room.Ports;
 using Application.Room.Requests;
 using Application.Room.Responses;
@@ -17,15 +17,15 @@ public class RoomManager : IRoomManager
         _mapper = mapper;
     }
 
-    public async Task<RoomResponse> Create(RoomRequest request)
+    public async Task<RoomResponse> Create(RoomRequest dto)
     {
-        Validate(request.Data);
+        Validate(dto.Data);
 
-        var guest = _mapper.Map<Domain.Entities.Room>(request.Data);
+        var guest = _mapper.Map<Domain.Entities.Room>(dto.Data);
 
         await _repository.SaveAsync(guest);
 
-        return new RoomResponse(data: request.Data,success: true);
+        return new RoomResponse(data: dto.Data,success: true);
     }
 
     public async Task<RoomResponse> GetById(int id)
@@ -33,7 +33,7 @@ public class RoomManager : IRoomManager
         return await ExistsRoom(id);
     }
 
-    private static void Validate(RoomDTO room)
+    private static void Validate(RoomDto room)
     {
         var validator = new RoomValidator();
         var response = validator.Validate(room);
@@ -52,7 +52,7 @@ public class RoomManager : IRoomManager
         if (room is null)
             throw new KeyNotFoundException($"Room with id: {id} not found");
 
-        var roomDto = _mapper.Map<RoomDTO>(room);
+        var roomDto = _mapper.Map<RoomDto>(room);
 
         return new RoomResponse(data: roomDto,success: true);
     }

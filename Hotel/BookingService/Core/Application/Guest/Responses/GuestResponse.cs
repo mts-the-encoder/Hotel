@@ -1,16 +1,16 @@
 ﻿using Application.Base;
-using Application.Guest.DTO;
+using Application.Guest.Dto;
 
 namespace Application.Guest.Responses;
 
 public class GuestResponse : Response
 {
-    public GuestDTO Data;
+    public GuestDto Data;
     public GuestResponse()
     {
     }
 
-    public GuestResponse(GuestDTO data,bool success)
+    public GuestResponse(GuestDto data,bool success)
     {
         Data = data;
         Success = success;

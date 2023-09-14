@@ -1,6 +1,6 @@
-﻿namespace Application.Guest.DTO;
+﻿namespace Application.Guest.Dto;
 
-public class GuestDTO
+public class GuestDto
 {
     public int Id { get; set; }
     public string Name { get; set; }

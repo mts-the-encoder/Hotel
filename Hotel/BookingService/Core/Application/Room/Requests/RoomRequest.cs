@@ -1,16 +1,16 @@
-﻿using Application.Guest.DTO;
-using Application.Room.DTO;
+﻿using Application.Guest.Dto;
+using Application.Room.Dto;
 
 namespace Application.Room.Requests;
 
 public class RoomRequest
 {
-    public RoomDTO Data;
+    public RoomDto Data;
     public RoomRequest()
     {
     }
 
-    public RoomRequest(RoomDTO data)
+    public RoomRequest(RoomDto data)
     {
         Data = data;
     }
