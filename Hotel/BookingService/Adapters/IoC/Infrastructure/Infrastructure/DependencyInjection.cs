@@ -1,5 +1,6 @@
 ﻿using Application.Booking.Ports;
 using Application.Guest.Ports;
+using Application.Payment.Ports;
 using Application.Room.Ports;
 using Application.Services;
 using Application.Services.Abstractions;
@@ -13,6 +14,7 @@ using Domain.Ports;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Payment.Application.MercadoPago;
 
 namespace IoC.Infrastructure;
 
@@ -31,6 +33,7 @@ public static class DependencyInjection
         services.AddScoped<IBookingManager, BookingManager>();
         services.AddScoped<IGuestManager, GuestManager>();
         services.AddScoped<IRoomManager, RoomManager>();
+        services.AddScoped<IPaymentService, MercadoPagoAdapter>();
         services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
 

@@ -28,7 +28,7 @@ public class RoomManager : IRoomManager
         return new RoomResponse(data: dto.Data,success: true);
     }
 
-    public async Task<RoomResponse> GetById(int id)
+    public async Task<RoomResponse> GetById(int id) 
     {
         return await ExistsRoom(id);
     }

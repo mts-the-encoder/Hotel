@@ -23,7 +23,7 @@ public class BookingRepository : IBookingRepository
     public async Task<int> SaveAsync(Booking booking)
     {
         var room = _dbContext.Rooms.FirstOrDefault(x => x.Id == booking.Room.Id);
-        var guest = _dbContext.Guests.FirstOrDefault(x => x.Id == booking.Room.Id);
+        var guest = _dbContext.Guests.FirstOrDefault(x => x.Id == booking.Guest.Id);
 
 
         booking.Guest = guest;
