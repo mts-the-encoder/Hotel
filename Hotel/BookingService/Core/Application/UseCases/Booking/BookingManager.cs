@@ -2,7 +2,9 @@
 using Application.Booking.Ports;
 using Application.Booking.Requests;
 using Application.Booking.Responses;
-using Application.Room.Responses;
+using Application.Payment.Ports;
+using Application.Payment.Requests;
+using Application.Payment.Responses;
 using AutoMapper;
 using Domain.Ports;
 
@@ -11,12 +13,14 @@ namespace Application.UseCases.Booking;
 public class BookingManager : IBookingManager
 {
     private readonly IBookingRepository _repository;
+    private readonly IPaymentProcessorFactory _paymentProcessorFactory;
     private readonly IMapper _mapper;
 
-    public BookingManager(IBookingRepository repository, IMapper mapper)
+    public BookingManager(IBookingRepository repository, IMapper mapper, IPaymentProcessorFactory paymentProcessorFactory)
     {
         _repository = repository;
         _mapper = mapper;
+        _paymentProcessorFactory = paymentProcessorFactory;
     }
 
     public async Task<BookingResponse> Create(BookingRequest dto)
@@ -33,6 +37,22 @@ public class BookingManager : IBookingManager
     public async Task<BookingResponse> GetById(int id)
     {
         return await ExistsBooking(id);
+    }
+
+    public async Task<PaymentResponse> PayForABooking(PaymentRequest paymentRequest)
+    {
+        var processor = _paymentProcessorFactory.GetPaymentProcessor(paymentRequest.SelectedPaymentProvider);
+
+        var response = await processor.CapturePayment(paymentRequest.PaymentIntention);
+
+        return response.Success
+            ? new PaymentResponse()
+            {
+                Success = true,
+                Data = response.Data,
+                Message = "Payment successfully processed"
+            }
+            : response;
     }
 
     private static void Validate(BookingDto booking)

@@ -1,5 +1,4 @@
-﻿using Application.Payment.Dto;
-using Application.Payment.Responses;
+﻿using Application.Payment.Responses;
 
 namespace Application.Payment.Ports;
 

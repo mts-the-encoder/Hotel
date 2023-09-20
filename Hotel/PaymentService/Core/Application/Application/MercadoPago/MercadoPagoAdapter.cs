@@ -6,23 +6,20 @@ using Application.Payment.Responses;
 
 namespace Payment.Application.MercadoPago;
 
-public class MercadoPagoAdapter : IPaymentService
+public class MercadoPagoAdapter : IPaymentProcessor
 {
-    public Task<PaymentResponse> PaymentWIthCreditCard(string paymentIntention)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<PaymentResponse> PaymentWIthDebitCard(string paymentIntention)
+    public Task<PaymentResponse> CapturePayment(string paymentIntention)
     {
         try
         {
             if (string.IsNullOrWhiteSpace(paymentIntention))
+            {
                 throw new InvalidPaymentIntentionException();
+            }
 
             paymentIntention += "/success";
 
-            var dto = new PaymentStateDto()
+            var dto = new PaymentStateDto
             {
                 CreatedDate = DateTime.Now,
                 Message = $"Successfully paid {paymentIntention}",
@@ -30,28 +27,25 @@ public class MercadoPagoAdapter : IPaymentService
                 Status = Status.Success
             };
 
-            var response = new PaymentResponse()
+            var response = new PaymentResponse
             {
-                PaymentDto = dto,
-                Success = true
+                Data = dto,
+                Success = true,
+                Message = "Payment successfully processed"
             };
 
             return Task.FromResult(response);
         }
         catch (InvalidPaymentIntentionException)
         {
-            var response = new PaymentResponse()
+            var resp = new PaymentResponse()
             {
                 Success = false,
-                ErrorCode = ErrorCodes.PAYMENT_INVLAID_INTENTION
+                ErrorCode = ErrorCodes.PAYMENT_INVALID_PAYMENT_INTENTION,
+                Message = "The selected payment intention is invalid"
             };
-
-            return Task.FromResult(response);
+            return Task.FromResult(resp);
         }
-    }
 
-    public Task<PaymentResponse> PaymentWIthBankTransfer(string paymentIntention)
-    {
-        throw new NotImplementedException();
     }
 }

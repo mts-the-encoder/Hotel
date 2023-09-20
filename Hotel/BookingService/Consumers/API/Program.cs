@@ -1,4 +1,6 @@
+using Application.Payment.Ports;
 using IoC.Infrastructure;
+using Payment.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 
+builder.Services.AddScoped<IPaymentProcessorFactory, PaymentProcessorFactory>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

@@ -33,7 +33,7 @@ public static class DependencyInjection
         services.AddScoped<IBookingManager, BookingManager>();
         services.AddScoped<IGuestManager, GuestManager>();
         services.AddScoped<IRoomManager, RoomManager>();
-        services.AddScoped<IPaymentService, MercadoPagoAdapter>();
+        services.AddScoped<IPaymentProcessor, MercadoPagoAdapter>();
         services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
 
