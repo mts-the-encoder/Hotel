@@ -23,15 +23,15 @@ public class BookingManager : IBookingManager
         _paymentProcessorFactory = paymentProcessorFactory;
     }
 
-    public async Task<BookingResponse> Create(BookingRequest dto)
+    public async Task<BookingResponse> Create(BookingDto dto)
     {
-        Validate(dto.Data);
+        Validate(dto);
 
-        var booking = _mapper.Map<Domain.Entities.Booking>(dto.Data);
+        var booking = _mapper.Map<Domain.Entities.Booking>(dto);
 
         await _repository.SaveAsync(booking);
 
-        return new BookingResponse(data: dto.Data, success: true);
+        return new BookingResponse(data: dto, success: true);
     }
 
     public async Task<BookingResponse> GetById(int id)

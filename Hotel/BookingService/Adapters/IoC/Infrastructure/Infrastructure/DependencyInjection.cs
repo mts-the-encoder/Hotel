@@ -36,6 +36,8 @@ public static class DependencyInjection
         services.AddScoped<IPaymentProcessor, MercadoPagoAdapter>();
         services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
+        var myHandlers = AppDomain.CurrentDomain.Load("Application");
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(myHandlers));
 
         return services;
     }

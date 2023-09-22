@@ -1,8 +1,11 @@
-﻿using Application.Booking.Dto;
+﻿using Application.Booking.Commands;
+using Application.Booking.Dto;
 using Application.Booking.Ports;
 using Application.Booking.Requests;
+using Application.Booking.Responses;
 using Application.Payment.Requests;
 using Application.Payment.Responses;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -10,19 +13,24 @@ namespace API.Controllers;
 public class BookingController : HotelBookingController
 {
     private readonly IBookingManager _bookingManager;
-    public BookingController(IBookingManager bookingManager)
+    private readonly IMediator _mediator;
+    public BookingController(IBookingManager bookingManager, IMediator mediator)
     {
         _bookingManager = bookingManager;
+        _mediator = mediator;
     }
 
     [HttpPost]
-    public async Task<ActionResult<BookingDto>> Create(BookingDto Dto)
+    public async Task<ActionResult<BookingResponse>> Create(BookingDto booking)
     {
-        var booking = new BookingRequest(data: Dto);
+        var command = new CreateBookingCommand
+        {
+            BookingDto = booking
+        };
 
-        await _bookingManager.Create(booking);
+        var response = await _mediator.Send(command);
 
-        return Created(string.Empty,booking.Data);
+        return Created(string.Empty, response.Data);
     }
 
     [HttpPost("{bookingId}Pay")]

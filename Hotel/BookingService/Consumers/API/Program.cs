@@ -1,5 +1,7 @@
 using Application.Payment.Ports;
+using Application.UseCases.Booking;
 using IoC.Infrastructure;
+using MediatR;
 using Payment.Application;
 
 var builder = WebApplication.CreateBuilder(args);
