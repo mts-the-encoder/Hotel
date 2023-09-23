@@ -1,6 +1,7 @@
 ﻿using Application.Booking.Commands;
 using Application.Booking.Dto;
 using Application.Booking.Ports;
+using Application.Booking.Queries;
 using Application.Booking.Requests;
 using Application.Booking.Responses;
 using Application.Payment.Requests;
@@ -45,8 +46,13 @@ public class BookingController : HotelBookingController
     [HttpGet("{id}")]
     public async Task<ActionResult<BookingDto>> Get(int id)
     {
-        var response = await _bookingManager.GetById(id);
+        var query = new GetBookingQuery
+        {
+            Id = id
+        };
 
+        var response = await _mediator.Send(query);
+         
         return Ok(response.Data);
     }
 }
